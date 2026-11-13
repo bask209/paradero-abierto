@@ -69,12 +69,23 @@ name: Open data smoke test
     visible: "Stations and stops"
     timeout: 60000
 - takeScreenshot: 05-search-calle72
-- tapOn:
-    text: ".*Calle 72.*"
-    index: 1
+- tapOn: "Calle 72 - Areandina"
+- extendedWaitUntil:
+    visible: ".*(Station|Estación).*"
+    timeout: 60000
 - extendedWaitUntil:
     visible: ".*min.*"
     timeout: 90000
 - waitForAnimationToEnd:
     timeout: 15000
-- takeScreenshot: 06-stop-arrivals
+- takeScreenshot: 06-station
+- swipe:
+    direction: UP
+    duration: 800
+- waitForAnimationToEnd:
+    timeout: 10000
+- takeScreenshot: 07-station-arrivals
+- swipe:
+    direction: UP
+    duration: 800
+- takeScreenshot: 08-station-more
