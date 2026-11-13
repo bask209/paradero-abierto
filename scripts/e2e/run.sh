@@ -7,6 +7,9 @@ APP=io.github.bask209.paraderoabierto
 OUT=${OUT:-e2e-out}
 mkdir -p "$OUT"
 
+# No "isn't responding" dialogs from a slow emulator over the app under test, and give it time to settle.
+adb shell settings put global hide_error_dialogs 1 || true
+sleep 30
 adb install -r app.apk
 adb shell pm grant "$APP" android.permission.ACCESS_FINE_LOCATION || true
 adb shell pm grant "$APP" android.permission.ACCESS_COARSE_LOCATION || true

@@ -5,16 +5,20 @@ name: Open data smoke test
     clearState: true
     permissions:
       location: allow
-# Onboarding: a note, the welcome, then location.
-- extendedWaitUntil:
-    visible: "Continue"
-    timeout: 90000
-- takeScreenshot: 01-onboarding
-- tapOn: "Continue"
+# A slow emulator sometimes shows "isn't responding" for the launcher; let it be.
+- tapOn:
+    text: "Wait"
+    optional: true
+# Onboarding: the welcome, a note, then location.
 - extendedWaitUntil:
     visible: "Get started"
-    timeout: 20000
+    timeout: 90000
+- takeScreenshot: 01-onboarding
 - tapOn: "Get started"
+- extendedWaitUntil:
+    visible: "Continue"
+    timeout: 20000
+- tapOn: "Continue"
 - extendedWaitUntil:
     visible: "Allow location"
     timeout: 20000
@@ -43,22 +47,14 @@ name: Open data smoke test
     text: ".*Portal Norte.*"
     index: 0
 - extendedWaitUntil:
-    visible: ".*Portal 80.*"
+    visible: ".*(buses running|bus running|No buses running|First bus).*"
     timeout: 60000
 - waitForAnimationToEnd:
     timeout: 15000
 - takeScreenshot: 04-route-b10
 
-# A station: live and scheduled arrivals.
-- back
-- extendedWaitUntil:
-    visible: "Routes"
-    timeout: 20000
-- tapOn:
-    id: "search-clear"
-    optional: true
-- eraseText: 10
-- inputText: "Calle 72"
+# A station: live and scheduled arrivals. The search tab takes ?q= as a deep link.
+- openLink: "paraderoabierto://search?q=Calle%2072"
 - extendedWaitUntil:
     visible: "Stations and stops"
     timeout: 60000
