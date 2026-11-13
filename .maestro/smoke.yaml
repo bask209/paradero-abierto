@@ -23,9 +23,12 @@ name: Open data smoke test
     visible: "Continue"
     timeout: 20000
 - tapOn: "Continue"
-- extendedWaitUntil:
-    visible: "Allow location"
-    timeout: 20000
+- waitForAnimationToEnd:
+    timeout: 10000
+- scrollUntilVisible:
+    element: "Allow location"
+    direction: DOWN
+    timeout: 60000
 - tapOn: "Allow location"
 - tapOn:
     text: "While using the app|Only this time|Allow"
