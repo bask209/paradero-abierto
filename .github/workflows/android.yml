@@ -7,9 +7,15 @@ on:
     branches: [main]
     paths-ignore: ["scripts/gtfs/**", "**.md"]
   workflow_dispatch:
+    inputs:
+      apk_from_run:
+        description: "Skip the build and test the APK from this earlier run id"
+        required: false
+        default: ""
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: android-${{ github.ref }}
@@ -17,6 +23,7 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ !inputs.apk_from_run }}
     runs-on: ubuntu-latest
     timeout-minutes: 75
     steps:
@@ -49,6 +56,7 @@ jobs:
 
   emulator:
     needs: build
+    if: ${{ always() && (needs.build.result == 'success' || needs.build.result == 'skipped') }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -56,6 +64,8 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: apk
+          run-id: ${{ inputs.apk_from_run || github.run_id }}
+          github-token: ${{ github.token }}
       - run: mv paradero-abierto.apk app.apk
       - name: Enable KVM
         run: |
@@ -87,6 +97,7 @@ jobs:
 
   release:
     needs: [build, emulator]
+    if: ${{ needs.build.result == 'success' && needs.emulator.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4

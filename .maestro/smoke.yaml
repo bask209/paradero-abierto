@@ -5,6 +5,10 @@ name: Open data smoke test
     clearState: true
     permissions:
       location: allow
+# Chapinero, through a mock location the fused provider accepts.
+- setLocation:
+    latitude: 4.6486
+    longitude: -74.0628
 # A slow emulator sometimes shows "isn't responding" for the launcher; let it be.
 - tapOn:
     text: "Wait"
@@ -26,6 +30,9 @@ name: Open data smoke test
 - tapOn:
     text: "While using the app|Only this time|Allow"
     optional: true
+- setLocation:
+    latitude: 4.6486
+    longitude: -74.0628
 
 # Home: nearby stops come from the bundle on the phone (first launch downloads it).
 - extendedWaitUntil:
