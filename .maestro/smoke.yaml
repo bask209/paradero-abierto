@@ -1,0 +1,74 @@
+appId: io.github.bask209.paraderoabierto
+name: Open data smoke test
+---
+- launchApp:
+    clearState: true
+    permissions:
+      location: allow
+# Onboarding: a note, the welcome, then location.
+- extendedWaitUntil:
+    visible: "Continue"
+    timeout: 90000
+- takeScreenshot: 01-onboarding
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Get started"
+    timeout: 20000
+- tapOn: "Get started"
+- extendedWaitUntil:
+    visible: "Allow location"
+    timeout: 20000
+- tapOn: "Allow location"
+- tapOn:
+    text: "While using the app|Only this time|Allow"
+    optional: true
+
+# Home: nearby stops come from the bundle on the phone (first launch downloads it).
+- extendedWaitUntil:
+    visible: ".*within 700 m.*"
+    timeout: 180000
+- takeScreenshot: 02-home-nearby
+
+# Search a route by its code and open it.
+- tapOn: "Search"
+- extendedWaitUntil:
+    visible: "B10"
+    timeout: 20000
+- tapOn: "B10"
+- extendedWaitUntil:
+    visible: "Routes"
+    timeout: 60000
+- takeScreenshot: 03-search-b10
+- tapOn:
+    text: ".*Portal Norte.*"
+    index: 0
+- extendedWaitUntil:
+    visible: ".*Portal 80.*"
+    timeout: 60000
+- waitForAnimationToEnd:
+    timeout: 15000
+- takeScreenshot: 04-route-b10
+
+# A station: live and scheduled arrivals.
+- back
+- extendedWaitUntil:
+    visible: "Routes"
+    timeout: 20000
+- tapOn:
+    id: "search-clear"
+    optional: true
+- eraseText: 10
+- inputText: "Calle 72"
+- extendedWaitUntil:
+    visible: "Stations and stops"
+    timeout: 60000
+- takeScreenshot: 05-search-calle72
+- tapOn:
+    text: ".*Calle 72.*"
+    index: 1
+- extendedWaitUntil:
+    visible: ".*min.*"
+    timeout: 90000
+- waitForAnimationToEnd:
+    timeout: 15000
+- takeScreenshot: 06-stop-arrivals

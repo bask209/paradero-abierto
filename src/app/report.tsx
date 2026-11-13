@@ -40,6 +40,11 @@ export default function Report() {
       }),
     onSuccess: (issue) => {
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      // The rider finished the report on GitHub, in the browser that just closed; nothing more to show here.
+      if (issue.number === 0) {
+        router.back();
+        return;
+      }
       announce(`${t.report.thanks} ${t.report.published(issue.number)}`);
     },
     onError: (error) => {
@@ -48,7 +53,7 @@ export default function Report() {
     },
   });
 
-  if (send.data) {
+  if (send.data && send.data.number > 0) {
     const issue = send.data;
     return (
       <View style={[styles.done, { backgroundColor: p.background }]}>

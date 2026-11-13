@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Paradero",
-    "slug": "paradero",
+    "name": "Paradero Abierto",
+    "slug": "paradero-abierto",
     "version": "0.0.6",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "paradero",
+    "scheme": "paraderoabierto",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/images/icon.png",
@@ -50,7 +50,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "co.usecroma.paradero",
+      "package": "io.github.bask209.paraderoabierto",
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -63,16 +63,11 @@
       ]
     },
     "web": {
-      "output": "server",
+      "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      [
-        "expo-router",
-        {
-          "origin": "https://paradero.expo.app"
-        }
-      ],
+      "expo-router",
       [
         "expo-splash-screen",
         {
@@ -102,7 +97,6 @@
     },
     "extra": {
       "router": {
-        "origin": "https://paradero.expo.app",
         "asyncRoutes": {
           "web": true
         }

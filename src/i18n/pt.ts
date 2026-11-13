@@ -1,3 +1,4 @@
+import { en } from "./en";
 import type { Messages } from "./es";
 
 export const pt: Messages = {
@@ -302,27 +303,7 @@ export const pt: Messages = {
     eyebrow: "Paradero · Bem público digital da Croma",
     title: "Sua privacidade, em poucas palavras.",
     updated: (date) => `Atualizada em ${date}.`,
-    sections: [
-      { title: "Você não tem conta", body: "O Paradero não pede e-mail, telefone, documento nem nome. Não há cadastro nem login." },
-      {
-        title: "Sua localização",
-        body: "Só a usamos com o app aberto e só se você permitir. Antes de sair do celular, nós a arredondamos para uns cem metros e a enviamos ao nosso servidor apenas para buscar os pontos próximos. Não a guardamos nem a associamos a você.",
-      },
-      {
-        title: "O que fica no seu celular",
-        body: "Seus pontos e linhas salvos, seus apelidos e suas preferências de aparência e idioma ficam só no seu celular. Se você apagar o app, eles são apagados.",
-      },
-      {
-        title: "Relatos",
-        body: "Se você relatar um problema, o texto que escrever é publicado no GitHub para que qualquer pessoa possa acompanhar. Antes de publicar, ocultamos e-mails, telefones e números de documento. Não guardamos quem enviou. Para limitar abusos, nosso servidor conta por um tempo quantos relatos chegam da mesma conexão, só na memória.",
-      },
-      { title: "Sem anúncios nem rastreamento", body: "O Paradero não tem anúncios, não usa análise de terceiros e não vende nem compartilha dados com ninguém." },
-      {
-        title: "De onde vêm os dados",
-        body: "Os horários, as posições dos ônibus e os avisos vêm dos dados abertos da TransMilenio, por meio da Croma. Nosso servidor os pede em seu nome, então a TransMilenio não vê sua conexão. Como qualquer serviço na internet, nosso provedor de hospedagem pode registrar dados técnicos das conexões por pouco tempo para operar e proteger o serviço.",
-      },
-      { title: "Código aberto", body: "Tudo o que esta página diz pode ser verificado no código, publicado sob a licença MIT em github.com/croma-labs/paradero." },
-      { title: "Perguntas", body: "Escreva para nós pelo app em “Relatar um problema ou uma ideia”, ou abra uma issue em github.com/croma-labs/paradero." },
-    ],
+    // The policy changed with the move to open data; English until it is translated again.
+    sections: en.privacy.sections,
   },
 };

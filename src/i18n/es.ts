@@ -306,26 +306,26 @@ export const es = {
     title: "Tu privacidad, en pocas palabras.",
     updated: (date: string) => `Actualizada el ${date}.`,
     sections: [
-      { title: "No tienes cuenta", body: "Paradero no pide correo, teléfono, cédula ni nombre. No hay registro ni inicio de sesión." },
+      { title: "No tienes cuenta", body: "La app no te pide correo, teléfono, cédula ni nombre. No hay registro ni inicio de sesión." },
       {
         title: "Tu ubicación",
-        body: "Solo la usamos con la app abierta y solo si nos das permiso. Antes de salir del teléfono la redondeamos a unos cien metros, y la enviamos a nuestro servidor únicamente para buscar los paraderos cercanos. No la guardamos ni la asociamos a ti.",
+        body: "La usamos solo con la app abierta y solo si nos das permiso. Nunca sale de tu teléfono: los paraderos cercanos se buscan en el mismo teléfono, con una copia del horario de TransMilenio guardada ahí.",
       },
       {
         title: "Lo que se queda en tu teléfono",
-        body: "Tus paraderos y rutas guardados, sus apodos y tus preferencias de apariencia e idioma viven solo en tu teléfono. Si borras la app, se borran.",
+        body: "Tus paraderos y rutas guardados, sus apodos, tus ajustes de apariencia e idioma y la copia del horario viven solo en tu teléfono. Si borras la app, se borran.",
       },
       {
         title: "Reportes",
-        body: "Si nos reportas un problema, el texto que escribas se publica en GitHub para que cualquiera pueda seguirlo. Antes de publicarlo ocultamos correos, teléfonos y números de documento. No guardamos quién lo envió. Para limitar el abuso, nuestro servidor cuenta por un rato cuántos reportes llegan desde una misma conexión, solo en memoria.",
+        body: "Si reportas un problema, la app abre un issue de GitHub ya escrito y tú lo envías desde tu propia cuenta de GitHub. Es público, así que no incluyas datos personales. La app no envía nada por su cuenta.",
       },
-      { title: "Sin publicidad ni rastreo", body: "Paradero no tiene anuncios, no usa analítica de terceros y no vende ni comparte datos con nadie." },
+      { title: "Sin publicidad ni rastreo", body: "La app no tiene anuncios, no usa analítica de terceros y nunca vende ni comparte datos con nadie." },
       {
         title: "De dónde salen los datos",
-        body: "Los horarios, las posiciones de los buses y las novedades vienen de los datos abiertos de TransMilenio, a través de Croma. Nuestro servidor los pide en tu nombre, así que TransMilenio no ve tu conexión. Como cualquier servicio en internet, nuestro proveedor de alojamiento puede registrar datos técnicos de las conexiones por un tiempo corto para operar y proteger el servicio.",
+        body: "Las posiciones de los buses y las novedades vienen directo de los datos abiertos de TransMilenio (gtfs.transmilenio.gov.co), y el horario de una copia diaria de su GTFS abierto publicada en GitHub Pages. Tu teléfono los descarga directamente, sin llave de API y sin un servidor nuestro en el medio, así que TransMilenio y GitHub ven tu conexión como cualquier sitio web.",
       },
-      { title: "Código abierto", body: "Todo lo que dice esta página se puede comprobar en el código, publicado con licencia MIT en github.com/croma-labs/paradero." },
-      { title: "Preguntas", body: "Escríbenos desde la app con «Reportar un problema o una idea», o abre un issue en github.com/croma-labs/paradero." },
+      { title: "Código abierto", body: "Todo lo de esta página se puede comprobar en el código, publicado con licencia MIT en github.com/bask209/paradero-abierto, una versión no oficial de Paradero de Croma." },
+      { title: "Preguntas", body: "Abre un issue en github.com/bask209/paradero-abierto." },
     ],
   },
 };

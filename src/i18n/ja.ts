@@ -1,3 +1,4 @@
+import { en } from "./en";
 import type { Messages } from "./es";
 
 export const ja: Messages = {
@@ -302,24 +303,7 @@ export const ja: Messages = {
     eyebrow: "Paradero · Cromaのデジタル公共財",
     title: "プライバシーについて、簡単に。",
     updated: (date) => `${date}更新。`,
-    sections: [
-      { title: "アカウントはありません", body: "Paraderoはメール、電話番号、身分証、名前を求めません。登録もログインもありません。" },
-      {
-        title: "位置情報",
-        body: "アプリを開いている間、許可があるときだけ使います。端末から送る前に約100メートル単位に丸め、近くの停留所を探すためだけにサーバーへ送ります。保存したり、あなたと結びつけたりはしません。",
-      },
-      { title: "端末に残るもの", body: "保存した停留所と路線、その呼び名、表示と言語の設定は端末の中だけにあります。アプリを削除すると消えます。" },
-      {
-        title: "報告",
-        body: "問題を報告すると、書いた内容は誰でも経過を見られるようGitHubで公開されます。公開前にメールアドレス、電話番号、身分証番号を非表示にします。送信者は記録しません。悪用を防ぐため、同じ接続からの報告数をサーバーのメモリ上で短時間だけ数えます。",
-      },
-      { title: "広告・トラッキングなし", body: "Paraderoには広告がなく、第三者の解析ツールも使わず、データを売ったり共有したりしません。" },
-      {
-        title: "データの出どころ",
-        body: "時刻表、バスの位置、運行情報はTransMilenioのオープンデータを、Croma経由で取得しています。サーバーが代わりに取得するので、TransMilenioにあなたの接続は見えません。一般的なインターネットサービスと同じく、ホスティング事業者はサービスの運用と保護のため、接続の技術情報を短期間記録することがあります。",
-      },
-      { title: "オープンソース", body: "このページの内容はすべて、github.com/croma-labs/paraderoでMITライセンスのもと公開されているコードで確認できます。" },
-      { title: "お問い合わせ", body: "アプリの「問題やアイデアを報告」から、またはgithub.com/croma-labs/paraderoでissueを作成してください。" },
-    ],
+    // The policy changed with the move to open data; English until it is translated again.
+    sections: en.privacy.sections,
   },
 };

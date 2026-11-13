@@ -1,3 +1,55 @@
+# Paradero Abierto
+
+An **unofficial fork** of [Paradero](https://github.com/croma-labs/paradero) by Croma, the open-source app for getting around Bogotá (TransMilenio, SITP, feeders and TransMiCable). It does the same job **without any API key and without a backend server**:
+
+| | Upstream Paradero | Paradero Abierto |
+|---|---|---|
+| Live bus positions, alerts | Croma API (needs `CROMA_API_KEY`) through Paradero's server | Read straight from TransMilenio's open GTFS-Realtime feeds (`gtfs.transmilenio.gov.co`) on the phone |
+| Stops, routes, timetables | Croma API | A compact bundle built **daily by GitHub Actions** from TransMilenio's open static GTFS and served from GitHub Pages; downloaded once (≈1.2 MB) and kept on the phone |
+| Nearby, search, arrivals | Croma server | Worked out on the phone (`src/open/`) |
+| Rider reports | Server posts an issue with a GitHub token | Opens a prefilled GitHub issue the rider sends from their own account |
+
+Not affiliated with Croma, TransMilenio or the City of Bogotá. Thanks to Croma for publishing Paradero under the MIT license.
+
+## Download
+
+The latest APK that passed the emulator test is attached to the [`latest` release](https://github.com/bask209/paradero-abierto/releases/tag/latest).
+
+## How it works
+
+```
+GitHub Actions (daily)                       Phone
+  GTFS_YYYYMMDD.zip  ──build.py──▶  Pages ──▶  transit-v1.json (cached in SQLite)
+  (storage.googleapis.com/gtfs-estaticos)       │
+                                                ├─ nearby / search / route lines / timetable
+gtfs.transmilenio.gov.co/positions.pb ────────▶ ├─ live buses, matched to their line
+gtfs.transmilenio.gov.co/alerts.pb    ────────▶ └─ service alerts
+```
+
+- `scripts/gtfs/build.py` (Python stdlib only) streams the ~580 MB `stop_times.txt`, groups trips into stop patterns, simplifies the shapes, and writes routes, stops, patterns (line, stop distances, scheduled offsets) and trip start times per service.
+- `src/open/gtfs-rt.ts` is a dependency-free protobuf reader for vehicle positions and alerts.
+- `src/open/realtime.ts` matches each bus to the line it is on (TransMilenio's realtime trip ids no longer match the timetable, so it uses the route, distance to each line, the stop the bus reports and its movement).
+- `src/open/engine.ts` returns exactly what the old `/api/*` routes returned, so the screens are unchanged. Live arrivals are **estimated** from the bus position and the scheduled pace between stops; routes with no bus seen fall back to the **timetable**, and the app says which is which.
+
+**Mobile data:** TransMilenio serves the whole city's positions in one uncompressed ~350 KB file with no caching headers. The app downloads it at most every 15 s and only while it is open and in front, which is about 1.4 MB a minute on a live screen.
+
+## Build
+
+Everything runs in GitHub Actions (`.github/workflows/`):
+
+- **Transit data** — builds the bundle and deploys it to GitHub Pages every morning.
+- **Android** — `npm run check`, `expo prebuild`, `gradlew assembleRelease`, then installs the APK on an Android emulator and drives it with Maestro (`.maestro/smoke.yaml`): onboarding, nearby stops, route search, a route, a station's arrivals. Screenshots are kept as the `e2e` artifact, and the tested APK is published to the `latest` release.
+
+Locally: `npm install && npx expo run:android` (no `.env` needed).
+
+## License
+
+[MIT](LICENSE), as upstream. Transit data © TransMilenio S.A., open data under CC BY-SA 4.0. Maps © CARTO and OpenStreetMap contributors. Fonts under the SIL Open Font License 1.1.
+
+---
+
+The upstream README follows.
+
 # Paradero
 
 **Tu bus, sin adivinar.** La app abierta para moverse en Bogotá: TransMilenio, SITP, alimentadores y TransMiCable en un solo lugar.

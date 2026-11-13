@@ -1,3 +1,4 @@
+import { en } from "./en";
 import type { Messages } from "./es";
 
 export const de: Messages = {
@@ -302,27 +303,7 @@ export const de: Messages = {
     eyebrow: "Paradero · Ein digitales Gemeingut von Croma",
     title: "Dein Datenschutz, in wenigen Worten.",
     updated: (date) => `Aktualisiert am ${date}.`,
-    sections: [
-      { title: "Du hast kein Konto", body: "Paradero fragt nicht nach E-Mail, Telefon, Ausweis oder Namen. Es gibt keine Registrierung und keine Anmeldung." },
-      {
-        title: "Dein Standort",
-        body: "Wir nutzen ihn nur bei geöffneter App und nur mit deiner Erlaubnis. Bevor er dein Telefon verlässt, runden wir ihn auf etwa hundert Meter und senden ihn nur an unseren Server, um Haltestellen in der Nähe zu finden. Wir speichern ihn nicht und verknüpfen ihn nicht mit dir.",
-      },
-      {
-        title: "Was auf deinem Telefon bleibt",
-        body: "Deine gespeicherten Haltestellen und Linien, ihre Spitznamen und deine Einstellungen für Darstellung und Sprache bleiben nur auf deinem Telefon. Wenn du die App löschst, werden sie gelöscht.",
-      },
-      {
-        title: "Meldungen",
-        body: "Wenn du ein Problem meldest, wird dein Text auf GitHub veröffentlicht, damit alle ihn verfolgen können. Vorher blenden wir E-Mail-Adressen, Telefon- und Ausweisnummern aus. Wir speichern nicht, wer ihn gesendet hat. Um Missbrauch zu begrenzen, zählt unser Server kurzzeitig nur im Arbeitsspeicher, wie viele Meldungen von derselben Verbindung kommen.",
-      },
-      { title: "Keine Werbung, kein Tracking", body: "Paradero hat keine Werbung, nutzt keine Analysedienste Dritter und verkauft oder teilt keine Daten." },
-      {
-        title: "Woher die Daten kommen",
-        body: "Fahrpläne, Buspositionen und Betriebshinweise stammen aus den offenen Daten von TransMilenio, über Croma. Unser Server fragt sie für dich ab, daher sieht TransMilenio deine Verbindung nicht. Wie jeder Internetdienst kann unser Hosting-Anbieter technische Verbindungsdaten kurz speichern, um den Dienst zu betreiben und zu schützen.",
-      },
-      { title: "Open Source", body: "Alles auf dieser Seite lässt sich im Code überprüfen, veröffentlicht unter MIT-Lizenz auf github.com/croma-labs/paradero." },
-      { title: "Fragen", body: "Schreib uns in der App über „Problem oder Idee melden“ oder eröffne ein Issue auf github.com/croma-labs/paradero." },
-    ],
+    // The policy changed with the move to open data; English until it is translated again.
+    sections: en.privacy.sections,
   },
 };

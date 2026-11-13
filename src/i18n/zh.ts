@@ -1,3 +1,4 @@
+import { en } from "./en";
 import type { Messages } from "./es";
 
 export const zh: Messages = {
@@ -301,24 +302,7 @@ export const zh: Messages = {
     eyebrow: "Paradero · Croma 的数字公共产品",
     title: "简单说说你的隐私。",
     updated: (date) => `更新于 ${date}。`,
-    sections: [
-      { title: "你没有账号", body: "Paradero 不要求邮箱、电话、证件或姓名。没有注册，也没有登录。" },
-      {
-        title: "你的位置",
-        body: "只在应用打开且获得你的许可时使用。位置离开手机前会被模糊到约一百米，只发送到我们的服务器用于查找附近站点。我们不保存它，也不会把它与你关联。",
-      },
-      { title: "留在你手机上的内容", body: "你收藏的站点和线路、它们的昵称，以及外观和语言设置都只保存在你的手机上。删除应用后，这些内容也会被删除。" },
-      {
-        title: "报告",
-        body: "如果你报告问题，你写的内容会发布在 GitHub 上，方便任何人跟进。发布前我们会隐藏邮箱、电话和证件号码。我们不记录发送者。为防止滥用，服务器会在内存中短暂统计同一连接发来的报告数量。",
-      },
-      { title: "无广告、无追踪", body: "Paradero 没有广告，不使用第三方分析工具，也不出售或与任何人共享数据。" },
-      {
-        title: "数据来源",
-        body: "时刻表、车辆位置和运营通知来自 TransMilenio 的开放数据，经由 Croma 获取。我们的服务器代你请求这些数据，因此 TransMilenio 看不到你的连接。与任何互联网服务一样，我们的托管服务商可能会短期记录连接的技术数据，以运行和保护服务。",
-      },
-      { title: "开源", body: "本页所说的一切都可以在代码中核实，代码以 MIT 许可证发布在 github.com/croma-labs/paradero。" },
-      { title: "问题", body: "在应用中通过「报告问题或提出想法」联系我们，或在 github.com/croma-labs/paradero 提交 issue。" },
-    ],
+    // The policy changed with the move to open data; English until it is translated again.
+    sections: en.privacy.sections,
   },
 };

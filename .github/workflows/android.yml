@@ -1,0 +1,102 @@
+name: Android
+
+# Builds the APK (no API key, no EAS account) and proves it works by driving
+# it in an Android emulator against the live open data.
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["scripts/gtfs/**", "**.md"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: npm ci
+      - name: Typecheck, lint, tokens, contrast, strings
+        run: npm run check
+      - name: Prebuild Android project
+        run: npx expo prebuild --platform android --no-install --clean
+      - name: Build release APK
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon -PreactNativeArchitectures=arm64-v8a,x86_64
+      - name: Collect APK
+        run: |
+          cp android/app/build/outputs/apk/release/app-release.apk paradero-abierto.apk
+          ls -la paradero-abierto.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: paradero-abierto.apk
+
+  emulator:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk
+      - run: mv paradero-abierto.apk app.apk
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install Maestro
+        run: curl -fsSL "https://get.maestro.mobile.dev" | bash
+      - name: Run the app in an emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          ram-size: 4096M
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          script: bash scripts/e2e/run.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e
+          path: e2e-out
+
+  release:
+    needs: [build, emulator]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk
+      - name: Publish the tested APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest --repo "$GITHUB_REPOSITORY" --yes --cleanup-tag || true
+          gh release create latest paradero-abierto.apk --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Paradero Abierto (latest tested build)" \
+            --notes "Built and tested in GitHub Actions from ${GITHUB_SHA}. Reads TransMilenio open data directly; no API key."

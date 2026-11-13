@@ -1,3 +1,4 @@
+import { en } from "./en";
 import type { Messages } from "./es";
 
 export const fr: Messages = {
@@ -302,27 +303,7 @@ export const fr: Messages = {
     eyebrow: "Paradero · Bien public numérique de Croma",
     title: "Votre vie privée, en quelques mots.",
     updated: (date) => `Mise à jour le ${date}.`,
-    sections: [
-      { title: "Vous n’avez pas de compte", body: "Paradero ne demande ni e-mail, ni téléphone, ni pièce d’identité, ni nom. Pas d’inscription ni de connexion." },
-      {
-        title: "Votre position",
-        body: "Nous l’utilisons seulement app ouverte et seulement avec votre accord. Avant qu’elle quitte votre téléphone, nous l’arrondissons à une centaine de mètres et l’envoyons à notre serveur uniquement pour trouver les arrêts proches. Nous ne la gardons pas et ne l’associons pas à vous.",
-      },
-      {
-        title: "Ce qui reste sur votre téléphone",
-        body: "Vos arrêts et lignes enregistrés, leurs surnoms et vos réglages d’apparence et de langue restent uniquement sur votre téléphone. Si vous supprimez l’app, ils sont supprimés.",
-      },
-      {
-        title: "Signalements",
-        body: "Si vous signalez un problème, le texte que vous écrivez est publié sur GitHub pour que tout le monde puisse le suivre. Avant publication, nous masquons e-mails, téléphones et numéros d’identité. Nous ne gardons pas qui l’a envoyé. Pour limiter les abus, notre serveur compte brièvement combien de signalements viennent d’une même connexion, en mémoire seulement.",
-      },
-      { title: "Ni publicité ni pistage", body: "Paradero n’a pas de publicité, n’utilise aucun outil d’analyse tiers et ne vend ni ne partage de données." },
-      {
-        title: "D’où viennent les données",
-        body: "Horaires, positions des bus et infos trafic viennent des données ouvertes de TransMilenio, via Croma. Notre serveur les demande pour vous, donc TransMilenio ne voit pas votre connexion. Comme tout service en ligne, notre hébergeur peut enregistrer brièvement des données techniques de connexion pour faire fonctionner et protéger le service.",
-      },
-      { title: "Code ouvert", body: "Tout ce que dit cette page peut être vérifié dans le code, publié sous licence MIT sur github.com/croma-labs/paradero." },
-      { title: "Questions", body: "Écrivez-nous depuis l’app avec « Signaler un problème ou une idée », ou ouvrez une issue sur github.com/croma-labs/paradero." },
-    ],
+    // The policy changed with the move to open data; English until it is translated again.
+    sections: en.privacy.sections,
   },
 };

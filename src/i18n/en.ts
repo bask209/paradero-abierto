@@ -303,26 +303,26 @@ export const en: Messages = {
     title: "Your privacy, in a few words.",
     updated: (date) => `Updated ${date}.`,
     sections: [
-      { title: "You don't have an account", body: "Paradero doesn't ask for your email, phone, ID or name. There is no sign-up or sign-in." },
+      { title: "You don't have an account", body: "This app doesn't ask for your email, phone, ID or name. There is no sign-up or sign-in." },
       {
         title: "Your location",
-        body: "We only use it while the app is open and only with your permission. Before it leaves your phone we round it to about a hundred meters, and we send it to our server only to find nearby stops. We don't store it or link it to you.",
+        body: "We only use it while the app is open and only with your permission. It never leaves your phone: nearby stops are found on the phone itself, from a copy of TransMilenio's timetable stored there.",
       },
       {
         title: "What stays on your phone",
-        body: "Your saved stops and routes, their nicknames and your appearance and language settings live only on your phone. If you delete the app, they are deleted.",
+        body: "Your saved stops and routes, their nicknames, your appearance and language settings and the copy of the timetable live only on your phone. If you delete the app, they are deleted.",
       },
       {
         title: "Reports",
-        body: "If you report a problem, the text you write is published on GitHub so anyone can follow it. Before publishing we hide emails, phone numbers and ID numbers. We don't store who sent it. To limit abuse, our server briefly counts how many reports come from the same connection, in memory only.",
+        body: "If you report a problem, the app opens a GitHub issue already written for you, and you send it from your own GitHub account. It is public, so don't include personal data. The app sends nothing on its own.",
       },
-      { title: "No ads or tracking", body: "Paradero has no ads, uses no third-party analytics and never sells or shares data with anyone." },
+      { title: "No ads or tracking", body: "This app has no ads, uses no third-party analytics and never sells or shares data with anyone." },
       {
         title: "Where the data comes from",
-        body: "Schedules, bus positions and service notices come from TransMilenio's open data, through Croma. Our server requests them on your behalf, so TransMilenio doesn't see your connection. Like any internet service, our hosting provider may log technical connection data for a short time to run and protect the service.",
+        body: "Bus positions and service notices come straight from TransMilenio's open data (gtfs.transmilenio.gov.co), and the timetable from a daily copy of its open GTFS published on GitHub Pages. Your phone downloads them directly, with no API key and no server of ours in between, so TransMilenio and GitHub see your connection like any website would.",
       },
-      { title: "Open source", body: "Everything on this page can be checked in the code, published under the MIT license at github.com/croma-labs/paradero." },
-      { title: "Questions", body: "Write to us from the app with “Report a problem or an idea”, or open an issue at github.com/croma-labs/paradero." },
+      { title: "Open source", body: "Everything on this page can be checked in the code, published under the MIT license at github.com/bask209/paradero-abierto, an unofficial fork of Croma's Paradero." },
+      { title: "Questions", body: "Open an issue at github.com/bask209/paradero-abierto." },
     ],
   },
 };
